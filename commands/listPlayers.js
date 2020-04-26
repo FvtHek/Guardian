@@ -24,7 +24,7 @@ module.exports.run = async (Ocelot, msg, args) => {
                 i++;
             })
 
-            msg.channel.send('Players online: \n\n' + playerArray);
+            msg.channel.send(list);
         } else {
             msg.channel.send('No players online.. :(')
         }
