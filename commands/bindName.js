@@ -9,7 +9,7 @@ module.exports.run = async (Guardian, msg, args) => {
         editedmessage = message.content.slice (6);
 
         client.msgs [message.member.id] = {
-            MCusername: message.content
+            MCusername: editedmessage.content
         }
         try {
             if (fs.existsSync(path)) {
@@ -33,6 +33,6 @@ module.exports.run = async (Guardian, msg, args) => {
 }
 
 module.exports.help = {
-    name: 'list',
+    name: 'bind',
     description: 'Bind discord ID to minecraft name',
 }
