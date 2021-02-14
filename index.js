@@ -1,4 +1,6 @@
-const Discord = require('discord.js');
+var Discord = require('discord.js');
+var unirest = require('unirest');    // npm install unirest
+var logger = require('winston');     // npm install winston
 const {prefix, token} = require('./config.json');
 const fs = require('fs');
 const bot = new Discord.Client();
