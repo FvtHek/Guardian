@@ -1,0 +1,2 @@
+// add a list of text/speach channels in a new category and add a support channel all containg the new game name of course
+// make sure there is a new role added with the name game as the title, this needs to be added in the role select as well
