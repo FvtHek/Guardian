@@ -29,6 +29,14 @@ module.exports.run = async (bot, message, args, prefix) => {
                 message.channel.send("Game already exists")
                 } else {
                         read_games.push(JSON.parse(data))
+                        message.guild.channels.create(args[0] + '-status', { //Create a channel
+                            type: 'voice', //Make sure the channel is a text channel
+                            permissionOverwrites: [{ //Set permission overwrites
+                                id: message.guild.id,
+                                allow: ['VIEW_CHANNEL'],
+                                deny: ['CONNECT']
+                            }]
+                        });
                         fs.writeFile(path, JSON.stringify(read_games), function(err){
                         if (err) throw err;
                         message.channel.send(args[0] + " has been added");

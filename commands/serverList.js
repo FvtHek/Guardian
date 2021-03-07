@@ -1,33 +1,38 @@
 const Discord = require("discord.js");
 const config = require('../config.json');
 
+// add a list of text/speach channels in a new category and add a support channel all containg the new game name of course
+// make sure there is a new role added with the name game as the title, this needs to be added in the role select as well
+const fs = require('fs');
+const path = './Games/games.json';
 
 module.exports.run = async (bot, message, args, prefix) => {
-    
-    var query = args[0];
-    console.log("https://api.battlemetrics.com/servers?filter[search]=\"" + query + "\"");
-    unirest.get("https://api.battlemetrics.com/servers?filter[search]=\"" + query + "\"")
-        .end(function (result) {
-            var json = JSON.parse(JSON.stringify(result.body));
-            if(result.status != 200) {
-                message.reply("An error occurred while trying to make the API request!");
-            } else {
-                console.log(json);
-                var i = 1;
-                message.channel.send("**Server List for "  + query + "**:");
-                json.data.map(data => {
-                    message.channel.send( "**Server #"  + i + "**:" + "\n" +
-                                       "\tServer Name: " + data.attributes.name + "\n" +
-                                            "\tServer ID: " + data.id + "\n" +
-                                            "\tGame: " + data.relationships.game.data.id + "\n" +
-                                            "\tServer IP: " + data.attributes.ip + "\n" +
-                                            "\tPlayers: " + data.attributes.players + "\n" +
-                                            "\tMax Players: " + data.attributes.maxPlayers + "\n" +
-                                            "\tServer Rank: " + data.attributes.rank);
-                    i = i + 1;
-                })
-            }
-        });
+    let games = {
+        name: args[0],
+        ip: args[1],
+        port: args[2], 
+        emoticon: args[3]
+    };
+    let data = JSON.stringify(games);
+    var game_exists = false;
+    games_list = [];
+    try {
+        if (fs.existsSync(path)) {
+            fs.readFile(path, (err, read) => {
+                if (err) throw err;
+                let read_games = JSON.parse(read);
+                for(var i = 0; i < read_games.length; i++) {
+                    var game_id = read_games[i];
+                    games_list.push(game_id.name)
+                }
+                message.channel.send(games_list);
+            })
+        }
+    } catch(err) {
+        console.error(err)
+    }
+
+
 }
 
 module.exports.help = {
