@@ -2,7 +2,7 @@ const Discord = require("discord.js");
 const config = require('../config.json');
 
 
-module.exports.run = async (bot, msg, args) => {
+module.exports.run = async (bot, message, args, prefix) => {
     
     var query = args[0];
     console.log("https://api.battlemetrics.com/servers?filter[search]=\"" + query + "\"");
@@ -28,7 +28,6 @@ module.exports.run = async (bot, msg, args) => {
                 })
             }
         });
-    break;
 }
 
 module.exports.help = {

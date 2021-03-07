@@ -2,7 +2,7 @@ const Discord = require("discord.js");
 const config = require('../config.json');
 
 
-module.exports.run = async (bot, msg, args) => {
+module.exports.run = async (bot, message, args, prefix) => {
 
     var gamename = args[0];
     unirest.get("https://api.battlemetrics.com/servers/".concat(server_id))
@@ -26,7 +26,6 @@ module.exports.run = async (bot, msg, args) => {
                                         "\tStatus: " + json.data.attributes.status + "\n");
             }
         });
-    break;
 }
 
 module.exports.help = {

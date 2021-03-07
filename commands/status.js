@@ -2,7 +2,7 @@ const Discord = require("discord.js");
 const config = require('../config.json');
 const mcping = require("mc-ping-updated");
 
-module.exports.run = async (bot, msg, args) => {
+module.exports.run = async (bot, message, args, prefix) => {
     
     var status;
 

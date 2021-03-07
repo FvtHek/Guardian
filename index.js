@@ -1,6 +1,6 @@
 var Discord = require('discord.js');
-var unirest = require('unirest');    // npm install unirest
-var logger = require('winston');     // npm install winston
+var unirest = require('unirest');    
+var logger = require('winston');     
 const {prefix, token} = require('./config.json');
 const fs = require('fs');
 const bot = new Discord.Client();
@@ -34,14 +34,31 @@ bot.on("message", async message => {
     if(message.author.bot) return;
     if(message.channel.type === "dm") return;
 
-let prefix = "&";
 let messageArray = message.content.split(" ");
 let cmd = messageArray[0];
 let args = messageArray.slice(1);
 
 let commandfile = bot.commands.get(cmd.slice(prefix.length));
-if(commandfile) commandfile.run(bot,message,args);
+if(commandfile) commandfile.run(bot,message,args,prefix);
+});
 
+
+bot.on('messageReactionAdd', async (reaction, user) => {
+	// When we receive a reaction we check if the reaction is partial or not
+	if (reaction.partial) {
+		// If the message this reaction belongs to was removed the fetching might result in an API error, which we need to handle
+		try {
+			await reaction.fetch();
+		} catch (error) {
+			console.error('Something went wrong when fetching the message: ', error);
+			// Return as `reaction.message.author` may be undefined/null
+			return;
+		}
+	}
+	// Now the message has been cached and is fully available
+	console.log(`${reaction.message.author}'s message "${reaction.message.content}" gained a reaction!`);
+	// The reaction is now also fully available and the properties will be reflected accurately:
+	console.log(`${reaction.count} user(s) have given the same reaction to this message!`);
 });
 
 function update() {

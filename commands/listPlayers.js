@@ -2,7 +2,7 @@ const Discord = require("discord.js");
 const config = require('../config.json');
 const mcping = require("mc-ping-updated");
 
-module.exports.run = async (Ocelot, msg, args) => {
+module.exports.run = async (bot, msg, args) => {
     var playerArray = [];
 
     mcping(config.ip, config.port, function(err, res) {
@@ -33,6 +33,6 @@ module.exports.run = async (Ocelot, msg, args) => {
 }
 
 module.exports.help = {
-    name: 'list',
+    name: 'listPlayers',
     description: 'returns a list of online players',
 }

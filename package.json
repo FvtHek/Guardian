@@ -10,6 +10,18 @@
   "license": "ISC",
   "dependencies": {
     "discord.js": "^12.2.0",
-    "mc-ping-updated": "^0.1.1"
-  }
+    "fs": "0.0.1-security",
+    "mc-ping-updated": "^0.1.1",
+    "unirest": "^0.6.0",
+    "winston": "^3.3.3"
+  },
+  "devDependencies": {},
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/FvtHek/Guardian.git"
+  },
+  "bugs": {
+    "url": "https://github.com/FvtHek/Guardian/issues"
+  },
+  "homepage": "https://github.com/FvtHek/Guardian#readme"
 }
